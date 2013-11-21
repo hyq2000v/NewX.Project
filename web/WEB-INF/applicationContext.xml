@@ -28,4 +28,24 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		p:dataSource-ref="dataSource" />
 		
+	<bean id="StrutsConfigService" class="newx.framework.StrutsConfigService" factory-method="getInstance">
+		<property name="projectList">
+			<list>
+				<bean class="newx.project.NewXProject">
+					<property name="id" value="Common"></property>
+					<property name="name" value="公共系统"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="FrameworkService" class="newx.framework.FrameworkService" factory-method="getInstance"></bean>
+	
+	<bean id="Framework" class="newx.framework.Framework" init-method="activate" factory-method="getInstance">
+		<property name="serviceList">
+			<list>
+				<ref bean="FrameworkService" />
+			</list>
+		</property>
+	</bean>
 </beans>

@@ -1,14 +1,13 @@
 package newx.structs;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.ServletException;
 
-import org.apache.log4j.Logger;
+import newx.framework.StrutsConfigService;
+import newx.project.NewXProject;
 
-import newx.project.IProjectInfo;
-import newx.util.BeanFactory;
-import newx.util.MappingCache;
+import org.apache.log4j.Logger;
 
 public class ActionServlet extends org.apache.struts.action.ActionServlet {
 
@@ -16,11 +15,11 @@ public class ActionServlet extends org.apache.struts.action.ActionServlet {
 	
 	protected void initOther() throws ServletException {
 		super.initOther();
-		Map<String, IProjectInfo> map = BeanFactory.getBeans(IProjectInfo.class);
-		if (map != null) {
-			for (IProjectInfo info : map.values()) {
-				log.info("加载模块:" + info.getProject().getName() + "(" + info.getProject().getId() + ")");
-				this.config += "," + "/WEB-INF/struts-config-" + info.getProject().getId().toLowerCase() + ".xml";
+		List<NewXProject> list = StrutsConfigService.getInstance().getProjectList();
+		if (list != null) {
+			for (NewXProject info : list) {
+				log.info("加载模块:" + info.getName() + "(" + info.getId() + ")");
+				this.config += "," + "/WEB-INF/struts-config-" + info.getId().toLowerCase() + ".xml";
 			}
 		}
 	}

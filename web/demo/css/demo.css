@@ -76,7 +76,7 @@ td {
 }
 	
 /*单记录表-录入单元格-text录入项*/
-.solidborder	{BEHAVIOR: url(/newx2/htc/text.htc);	
+.solidborder	{BEHAVIOR: url(/newx/htc/text.htc);	
     BORDER-RIGHT: #999999 1px solid;
     BORDER-TOP: #999999 1px solid;
     BORDER-LEFT: #999999 1px solid;
@@ -90,7 +90,7 @@ td {
 	}
 	
 /*单记录表-录入单元格-textarea录入项*/	
-.solidtextArea	{BEHAVIOR: url(/newx2/htc/text.htc);
+.solidtextArea	{BEHAVIOR: url(/newx/htc/text.htc);
     BORDER-RIGHT: #6C6D86 1px solid;
     BORDER-TOP: #6C6D86 1px solid;
     FONT-SIZE: 12px;
@@ -102,7 +102,7 @@ td {
 
 }
 	
-.solidselect{BEHAVIOR: url(/newx2/htc/text.htc);
+.solidselect{BEHAVIOR: url(/newx/htc/text.htc);
 	font-family: "Verdana", "Arial","新宋体", "宋体"; 
 	font-size: 12px; border: 1px solid;
 	border-left:hidden;
@@ -113,7 +113,7 @@ td {
 	height:18px;
 }
 
-.solidmulselect{BEHAVIOR: url(/newx2/htc/text.htc);
+.solidmulselect{BEHAVIOR: url(/newx/htc/text.htc);
 	font-family: "Verdana", "Arial","新宋体", "宋体"; 
 	font-size: 12px; border: 1px solid;
 	border-left:hidden;
@@ -630,7 +630,7 @@ a:hover{
 
 /*效果按钮*/
 a.buttonLink{
-    BEHAVIOR: url(/newx2/htc/buttonEffect.htc);
+    BEHAVIOR: url(/newx/htc/buttonEffect.htc);
     display:inline-block;
 	TEXT-DECORATION: none;
 	padding-top:4px;word-spacing:6px;
@@ -655,7 +655,7 @@ a.buttonLink:hover{
 	}
 /*leaf 99控件,目前只用到date和回车*/
 .mask {
-    BEHAVIOR: url(/newx2/htc/EAFformat.htc);
+    BEHAVIOR: url(/newx/htc/EAFformat.htc);
 	OVERFLOW: hidden ;border: 1px #B7B7B7 solid;
 	font-family: "宋体",font-size: 12px; Helvetica, sans-serif;
 	width: 100%;word-wrap:normal;
@@ -665,7 +665,7 @@ a.buttonLink:hover{
 	padding-top:5px;
 }
 buttonLink {
-    BEHAVIOR: url(/newx2/htc/buttonEffect.htc);
+    BEHAVIOR: url(/newx/htc/buttonEffect.htc);
     display:inline-block;
 	TEXT-DECORATION: none;
 	padding-top:4px;word-spacing:6px;
