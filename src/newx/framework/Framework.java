@@ -8,9 +8,14 @@ import org.apache.log4j.Logger;
 public class Framework {
 	
 	private static final Logger log = Logger.getLogger(Framework.class);
+	
+	/**
+	 * 模块列表-子系统级
+	 */
 	private List<IModule> serviceList = new ArrayList<IModule>();
 	
 	private static Framework framework = null;
+	private static boolean activate = false;
 
 	public List<IModule> getServiceList() {
 		return serviceList;
@@ -31,5 +36,11 @@ public class Framework {
 	}
 	
 	private void activate() {
+		if (!activate) {
+			for (IModule module : serviceList) {
+				module.activate();
+			}
+			activate = true;
+		}
 	}
 }

@@ -12,7 +12,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
-import newx.menu.RightObject;
+import newx.mod.menu.RightObject;
 import newx.util.SysUtil;
 
 import org.apache.log4j.Logger;

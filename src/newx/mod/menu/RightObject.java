@@ -1,4 +1,4 @@
-package newx.menu;
+package newx.mod.menu;
 
 public class RightObject {
 	private String id;

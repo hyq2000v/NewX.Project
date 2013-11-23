@@ -1,10 +1,12 @@
-package newx.menu;
+package newx.mod.menu;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
 
+import newx.framework.IModule;
 import newx.repository.SysRightDao;
 import newx.util.BeanFactory;
 
@@ -12,7 +14,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-public class MenuService {
+public class MenuService implements IModule {
 
 	private static final Logger log = Logger.getLogger(MenuService.class);
 	private static MenuService instance = null;
@@ -20,12 +22,14 @@ public class MenuService {
 	@Autowired
 	private SysRightDao sysRightDao;
 
-	private MenuService() {
+	private MenuService() {}
+	
+	public void activate() {
 	}
-
+	
 	public static MenuService getInstance() {
 		if (instance == null) {
-			instance = BeanFactory.getBean(MenuService.class);
+			instance = new MenuService();
 		}
 		return instance;
 	}
@@ -117,7 +121,7 @@ public class MenuService {
 		StringBuffer sb = new StringBuffer();
 		Vector lvl3Menus = this.getLowerLvlMenu(parentID);
 		sb.append(get3LvlStartStr(parentID));
-		for (int j = 0; j < lvl3Menus.size(); j++) {// ��ÿһ��3���˵�ѭ��
+		for (int j = 0; j < lvl3Menus.size(); j++) {
 			RightObject mo = (RightObject) lvl3Menus.get(j);
 			String url = mo.getUrl();
 			String name = mo.getRightname();

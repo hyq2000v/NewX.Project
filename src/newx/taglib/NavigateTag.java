@@ -8,7 +8,7 @@ import java.util.HashMap;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import newx.menu.RightObject;
+import newx.mod.menu.RightObject;
 import newx.repository.MemRecordSet;
 import newx.repository.SysRightDao;
 import newx.taglib.base.RecordProvider;
