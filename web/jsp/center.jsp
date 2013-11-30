@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<%@page contentType="text/html;charset=utf-8" %>
+<%@ taglib uri="newx.tld" prefix="newx" %>
+<%@page import="newx.util.*"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <head>
-<title>Demo Main</title>
+<title><%=SysUtil.getTitle()%></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>banner</title>
+<LINK href="<%=request.getContextPath()%>/css/newx.css" type=text/css rel=StyleSheet>
 </head>
-<body bgcolor="#ADB6C6" background="<%= request.getContextPath()%>/images/main_bg.gif" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="margin-left:0px">
+<body>
 </body>
 </html>

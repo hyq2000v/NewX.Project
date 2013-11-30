@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=utf-8" %>
-<%@page import="newx.framework.ConfigService"%>
+<%@page import="newx.framework.FrameworkService"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
 <HEAD>
 <meta HTTP-EQUIV="Expires" CONTENT="0">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title><%=ConfigService.getInstance().getTitle()%></title>
+<title><%=FrameworkService.getInstance().getTitle()%></title>
 </head>
 	<frameset name="topFrame" rows="49,35,*" cols="*" frameborder="NO" border="1" framespacing="0">
 		<frame  scrolling="NO" noresize src="banner.jsp">

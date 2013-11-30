@@ -2,17 +2,13 @@ package newx.taglib;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import newx.mod.menu.RightObject;
-import newx.repository.MemRecordSet;
-import newx.repository.SysRightDao;
-import newx.taglib.base.RecordProvider;
-import newx.util.BeanFactory;
+import newx.mod.menu.MenuService;
+import newx.mod.menu.Right;
 
 public class NavigateTag extends BodyTagSupport {
 	
@@ -44,18 +40,17 @@ public class NavigateTag extends BodyTagSupport {
 		if (map.get(navId) != null) {
 			return map.get(navId);
 		} else {
-			SysRightDao dao = BeanFactory.getBean(SysRightDao.class); 
-			RightObject right = null;
-			right = dao.getRightById(navId);
+			Right right = null;
+			right = MenuService.getInstance().getRightById(navId);
 			while(right != null) {
 				if ("0".equals(right.getParentid())) {
 					sb = right.getRightname() + sb;
 				} else {
-					sb = "->" + right.getRightname() + sb;
+					sb = " -> " + right.getRightname() + sb;
 				}
-				right = dao.getRightById(right.getParentid());
+				right = MenuService.getInstance().getRightById(right.getParentid());
 			}
-			sb = "<div> <br>&nbsp&nbsp<b>" + sb + "</b></div>";
+			sb = "<div><br>&nbsp&nbsp<b>" + sb + "</b></div>";
 			map.put(navId, sb);
 			return sb;
 		}

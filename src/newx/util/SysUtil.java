@@ -7,6 +7,8 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
+import newx.framework.FrameworkService;
+
 import org.jdom.Element;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
@@ -42,5 +44,9 @@ public class SysUtil {
 		} else {
 			return defaultVal;
 		}
+	}
+	
+	public static String getTitle() {
+		return FrameworkService.getInstance().getTitle();
 	}
 }

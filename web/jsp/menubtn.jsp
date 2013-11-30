@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=utf-8" %>
-<%@page import="newx.framework.ConfigService"%>
+<%@page import="newx.framework.FrameworkService"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title><%=ConfigService.getInstance().getTitle()%></title>
+<title><%=FrameworkService.getInstance().getTitle()%></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.9.1.js"></script>

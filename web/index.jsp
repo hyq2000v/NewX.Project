@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=utf-8" %>
-<%@page import="newx.framework.ConfigService"%>
+<%@page import="newx.framework.FrameworkService"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.9.1.js"></script>
-<title><%=ConfigService.getInstance().getTitle()%></title>
+<title><%=FrameworkService.getInstance().getTitle()%></title>
 <style type="text/css">
 <!--
 *{overflow:hidden; font-size:9pt;}

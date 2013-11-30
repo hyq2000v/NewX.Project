@@ -10,10 +10,7 @@
         <listener-class>newx.listener.Log4jListener</listener-class>
     </listener>
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>newx.listener.NewXConfiguration</listener-class>
+        <listener-class>newx.listener.NewXContextLoaderListener</listener-class>
     </listener>
     <listener>
         <listener-class>newx.listener.BeanCustomEventListtener</listener-class>

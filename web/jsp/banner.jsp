@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=utf-8" %>
-<%@page import="newx.framework.ConfigService"%>
+<%@page import="newx.framework.FrameworkService"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<title><%=ConfigService.getInstance().getTitle()%></title>
+<title><%=FrameworkService.getInstance().getTitle()%></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link href="<%= request.getContextPath()%>/css/bootstrap.css" rel="stylesheet" media="screen">
 <link href="<%= request.getContextPath()%>/css/bootstrap.responsive.css" rel="stylesheet" media="screen">

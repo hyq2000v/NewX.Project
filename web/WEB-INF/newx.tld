@@ -7,7 +7,7 @@
     <shortname>newx</shortname>
     <uri></uri>
     <tag>
-        <name>NavStr</name>
+        <name>NavBar</name>
         <tagclass>newx.taglib.NavigateTag</tagclass>
         <bodycontent>empty</bodycontent>
     </tag>

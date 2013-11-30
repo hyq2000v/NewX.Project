@@ -35,10 +35,13 @@
 					<property name="id" value="Common"></property>
 					<property name="name" value="公共系统"></property>
 				</bean>
+				<bean class="newx.project.NewXProject">
+					<property name="id" value="Demo"></property>
+					<property name="name" value="测试"></property>
+				</bean>
 			</list>
 		</property>
 	</bean>
-	
 	<bean id="FrameworkService" class="newx.framework.FrameworkService" factory-method="getInstance"></bean>
 	<bean id="MenuService" class="newx.mod.menu.MenuService" factory-method="getInstance"></bean>
 	

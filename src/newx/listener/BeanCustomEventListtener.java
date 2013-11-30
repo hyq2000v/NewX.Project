@@ -15,7 +15,7 @@ import newx.framework.IListenerBean;
 public class BeanCustomEventListtener implements ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent evt) {
-		Map map = NewXConfiguration.getSpringContext().getBeansOfType(IListenerBean.class);
+		Map map = NewXContextLoaderListener.getSpringContext().getBeansOfType(IListenerBean.class);
 		if (map != null) {
 			for (Iterator it = map.values().iterator(); it.hasNext();) {
 				Object bean = it.next();

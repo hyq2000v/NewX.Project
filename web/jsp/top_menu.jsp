@@ -1,11 +1,15 @@
 <%@ page contentType="text/html;charset=utf-8" %>
-<%@page import="newx.framework.ConfigService"%>
+<%@page import="newx.framework.FrameworkService"%>
+<%@page import="newx.mod.menu.MenuService"%>
+<%@page import="newx.mod.menu.Right"%>
+<%@page import="newx.util.SysUtil"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title><%=ConfigService.getInstance().getTitle()%></title>
+<title><%=SysUtil.getTitle()%></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link href="<%= request.getContextPath()%>/css/newx.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/newx.css" rel="stylesheet">
 <style type="text/css">
 body {height: 100%;}
 .breadcrumb {
@@ -37,23 +41,23 @@ body {height: 100%;}
 }
 </style>
 </head>
+<%
+	List<Right> menuList = MenuService.getInstance().getTopMenu();
+%>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="margin-left:0px;margin-right:0px" width="100%" height='100%'>
     <div class="breadcrumb">
         <table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" style="padding-top:2px">
             <tr>
                 <td><div style="width:151px"></div></td>
                 <td nowrap></td>
-                <td nowrap><a href="#"><img src="<%= request.getContextPath()%>/images/bof/pageSetup.png"/>&nbsp;菜单1</a></td>
+                <%
+                	for (Right right : menuList) {
+                %>
+                <td nowrap><a href="#" mid="<%= right.getId()%>"><img src="<%= request.getContextPath()%>/images/bof/pageSetup.png"/><%= right.getRightname() %></a></td>
                 <td nowrap width="10px"></td>
-                <td nowrap><a href="#"><img src="<%= request.getContextPath()%>/images/bof/pageSetup.png"/>&nbsp;菜单1</a></td>
-                <td nowrap width="10px"></td>
-                <td nowrap><a href="#"><img src="<%= request.getContextPath()%>/images/bof/pageSetup.png"/>&nbsp;菜单1</a></td>
-                <td nowrap width="10px"></td>
-                <td nowrap><a href="#"><img src="<%= request.getContextPath()%>/images/bof/pageSetup.png"/>&nbsp;菜单1</a></td>
-                <td nowrap width="10px"></td>
-                <td nowrap><a href="#"><img src="<%= request.getContextPath()%>/images/bof/pageSetup.png"/>&nbsp;菜单1</a></td>
-                <td nowrap width="10px"></td>
-                <td nowrap><a href="#"><img src="<%= request.getContextPath()%>/images/bof/pageSetup.png"/>&nbsp;菜单1</a></td>
+                <%
+                }
+                %>
                 <td width="100%"></td>
             </tr>
         <table>
