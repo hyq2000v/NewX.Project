@@ -1,0 +1,84 @@
+package newx.taglib.base;
+
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletRequest;
+
+import newx.framework.IModule;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+
+public class TagService implements IModule {
+
+	private static final Logger log = Logger.getLogger(TagService.class);
+	
+	private static TagService instance = null;
+	
+	@Autowired
+	private TagDao tagDao;
+	
+	private TagService() {}
+	
+	public static TagService getInstance() {
+		if (instance == null) {
+			instance = new TagService();
+		}
+		return instance;
+	}
+	
+	public void activate() {
+//		String sql = "select name, ctime from log_activity where name = :name";
+//		MapSqlParameterSource paramMap = new MapSqlParameterSource();
+//		paramMap.addValue("name", "0");
+//		List<Map> list = tagDao.query(sql, new FieldColumnMapRowMapper(), paramMap);
+//		for (Map m : list) {
+//			System.out.print("=====:" + m.get("name"));
+//			System.out.println("=====:" + m.get("ctime"));
+//		}
+	}
+	
+	public void queryForObject(MemRecordSet recordSet, RecordProvider provider, ServletRequest request) {
+		String sql = provider.getSql();
+		MapSqlParameterSource paramMap = getParamMap(request, provider);
+		Map data = tagDao.queryForObject(sql, new FieldColumnMapRowMapper(), paramMap);
+		recordSet.populate(provider.getId(), data);
+	}
+	
+	public void query(MemRecordSet recordSet, RecordProvider provider, ServletRequest request) {
+		String sql = provider.getSql();
+		MapSqlParameterSource paramMap = getParamMap(request, provider);
+		List<Map> list = tagDao.query(sql, new FieldColumnMapRowMapper(), paramMap);
+		recordSet.populate(provider.getId(), list);
+	}
+	
+	private MapSqlParameterSource getParamMap(ServletRequest request, RecordProvider provider) {
+		Map<String, PrividerParam> paramMap = provider.getParamMap();
+		List<PrividerParam> parseParam = provider.getParseParam();
+		MapSqlParameterSource sqlParam = new MapSqlParameterSource();
+		Enumeration enumer = request.getParameterNames();
+		Object paramName = null;
+		for (PrividerParam pp : paramMap.values()) {
+			sqlParam.addValue(pp.getName(), pp.getValue());
+		}
+		while (enumer.hasMoreElements()) {
+			paramName = enumer.nextElement();
+			if (!paramMap.keySet().contains(paramName) && !findPrividerParam(paramName, parseParam)) {
+				sqlParam.addValue(paramName.toString(), request.getParameter(paramName.toString()));
+			}
+		}
+		return sqlParam;
+	}
+	
+	private boolean findPrividerParam(Object name, List<PrividerParam> paramList) {
+		for (PrividerParam p : paramList) {
+			if (name.equals(p.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+}
