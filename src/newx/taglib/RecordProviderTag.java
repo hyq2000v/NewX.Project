@@ -4,17 +4,18 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import newx.taglib.base.IRecordSetOwner;
+import newx.taglib.base.PrividerParam;
 import newx.taglib.base.RecordProvider;
 
 public class RecordProviderTag extends BodyTagSupport {
 
 	private String id = "";
 	
-	private String where = "";
-	
 	private String outParam = "";
 	
 	private String sql = "";
+	
+	private RecordProvider provider = null;
 	
 	public String getId() {
 		return id;
@@ -32,14 +33,6 @@ public class RecordProviderTag extends BodyTagSupport {
 		this.sql = sql;
 	}
 
-	public String getWhere() {
-		return where;
-	}
-
-	public void setWhere(String where) {
-		this.where = where;
-	}
-
 	public String getOutParam() {
 		return outParam;
 	}
@@ -47,15 +40,31 @@ public class RecordProviderTag extends BodyTagSupport {
 	public void setOutParam(String outParam) {
 		this.outParam = outParam;
 	}
+	
+	public void addPram(PrividerParam param) {
+		provider.addPram(param);
+	}
 
+	public int doStartTag() throws JspException {
+		provider = new RecordProvider();
+		return super.doStartTag();
+	}
+	
 	public int doEndTag() throws JspException {
 		IRecordSetOwner owner = (IRecordSetOwner)getParent();
-		RecordProvider provider = new RecordProvider();
 		provider.setId(id);
-		provider.setWhere(where);
 		provider.setOutParam(outParam);
 		provider.setSql(sql);
+		provider.parse();
 		owner.addRecordProvider(provider);
+		reset();
 		return EVAL_PAGE;
+	}
+	
+	private void reset() {
+		id = "";
+		outParam = "";
+		sql = "";
+		provider = null;
 	}
 }

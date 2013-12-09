@@ -12,9 +12,21 @@
 <link href="<%=request.getContextPath()%>/css/menu.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%= request.getContextPath()%>/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="<%= request.getContextPath()%>/js/common.js"></script>
-<script type="text/javascript">
-var rigehtList = new Object();
-</script>
+<style type="text/css">
+/*平常的状态*/
+.link_normal{
+    font-size:9pt;
+	font-family:宋体;
+	color:#2E0390;
+    text-decoration:none;
+}
+/*连接被按下的时候 */
+.link_hover{
+	color: #aaaaaa; 
+    font-size:9pt;
+    text-decoration:none;
+}
+</style>
 </head>
 <body class="navibody">
     <table width="75%" height="" border="0" cellspacing="0" cellpadding="0">
@@ -24,11 +36,11 @@ var rigehtList = new Object();
 <table style="background-repeat: repeat-y;background-position: right top;" border=0  cellspacing=0 cellpadding=0 width=100%>
 
 <%
-String parentId = request.getParameter("parenId");
+	String parentId = request.getParameter("parenId");
 if (StringUtil.isNullOrEmpty(parentId)) {
 	parentId = MenuService.getInstance().getFirstTopRight().getId();
 }
-List<RightTreeNode> list = MenuService.getInstance().getRight(parentId);
+List<RightTreeNode> list = MenuService.getInstance().getChildren(parentId);
 List<Right> rightList = new ArrayList<Right>();
 for (RightTreeNode node : list) {
 	Right right = node.getValue();
@@ -54,7 +66,10 @@ for (RightTreeNode node : list) {
                 		Right lev3right = lev3Node.getValue();
                 		rightList.add(lev3right);
                 	%>
-                    <tr><td class=lefticon></td><td align="left"><a name="lev3menu" id="<%= lev3right.getId() %>" style="cursor:pointer" class="left1"> <%= lev3right.getRightname() %> </a></td></tr>
+                    <tr><td class=lefticon></td><td align="left"><span name="lev3menu" id="<%= lev3right.getId() %>" style="cursor:pointer" class="link_normal"
+                    onMouseOut="this.className='link_normal';"
+                    onMouseOver="this.className='link_hover';"
+                    > <%= lev3right.getRightname() %> </span></td></tr>
                 	<%
                 	}
                 	%>
@@ -80,7 +95,7 @@ $(document).ready(function() {
         	$(window.parent.document).find("#workspace").attr("src", rightList[this.id]);
         }
     });
-    $("a[name=lev3menu]").click(function() {
+    $("span[name=lev3menu]").click(function() {
         if (!isNull(rightList[this.id])) {
         	$(window.parent.document).find("#workspace").attr("src", rightList[this.id]);
         }

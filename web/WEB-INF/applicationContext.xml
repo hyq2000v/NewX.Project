@@ -42,14 +42,16 @@
 			</list>
 		</property>
 	</bean>
+	
 	<bean id="FrameworkService" class="newx.framework.FrameworkService" factory-method="getInstance"></bean>
 	<bean id="MenuService" class="newx.mod.menu.MenuService" factory-method="getInstance"></bean>
-	
+	<bean id="TagService" class="newx.taglib.base.TagService" factory-method="getInstance"></bean>
 	<bean id="Framework" class="newx.framework.Framework" init-method="activate" factory-method="getInstance">
 		<property name="serviceList">
 			<list>
 				<ref bean="FrameworkService" />
 				<ref bean="MenuService" />
+				<ref bean="TagService" />
 			</list>
 		</property>
 	</bean>

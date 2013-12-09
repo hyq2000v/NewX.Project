@@ -9,12 +9,11 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import newx.repository.DACommand;
-import newx.repository.MemRecord;
-import newx.repository.MemRecordSet;
 import newx.taglib.base.IRecordSetOwner;
+import newx.taglib.base.MemRecord;
+import newx.taglib.base.MemRecordSet;
 import newx.taglib.base.RecordProvider;
-import newx.util.StringUtil;
+import newx.taglib.base.TagService;
 
 public class SingleRecordSetTag extends BodyTagSupport implements IRecordSetOwner{
 	
@@ -47,13 +46,12 @@ public class SingleRecordSetTag extends BodyTagSupport implements IRecordSetOwne
 	}
 	
 	public int doAfterBody() throws JspException {
-		DACommand command = new DACommand();
 		ServletRequest request = pageContext.getRequest();
 		for (RecordProvider provider : providerList) {
 			if (provider.getId().indexOf("_dd_") == -1) {
-				command.queryForObject(memRecordSet, provider, request);
+				TagService.getInstance().queryForObject(memRecordSet, provider, request);
 			} else {
-				command.query(memRecordSet, provider, request);
+				TagService.getInstance().query(memRecordSet, provider, request);
 			}
 		}
 		return SKIP_BODY;

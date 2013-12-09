@@ -39,7 +39,7 @@ public class MenuService implements IModule {
 		return rights;
 	}
 	
-	public List<RightTreeNode> getRight(String topParentId) {
+	public List<RightTreeNode> getChildren(String topParentId) {
 		for (RightTreeNode node : topRights) {
 			if (topParentId.equalsIgnoreCase(node.getValue().getId())) {
 				return node.getChildren();

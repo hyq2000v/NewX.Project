@@ -273,6 +273,10 @@ td {
 	BORDER-BOTTOM: #D4DBEB 1px solid;
 }
 
+.panelBorder{		 
+	background-color:#eef1f7;
+}
+
 
 
 .tableline{
@@ -628,6 +632,8 @@ a:hover{
     text-decoration:none;
 }
 
+
+
 /*效果按钮*/
 a.buttonLink{
     BEHAVIOR: url(/newx/htc/buttonEffect.htc);
@@ -653,6 +659,7 @@ a.buttonLink:active{
 a.buttonLink:hover{
 	COLOR: #003AA3;TEXT-DECORATION: none;
 	}
+	
 /*leaf 99控件,目前只用到date和回车*/
 .mask {
     BEHAVIOR: url(/newx/htc/EAFformat.htc);

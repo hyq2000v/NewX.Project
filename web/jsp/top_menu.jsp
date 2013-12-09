@@ -10,6 +10,8 @@
 <title><%=SysUtil.getTitle()%></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link href="<%=request.getContextPath()%>/css/newx.css" rel="stylesheet">
+<script type="text/javascript" src="<%= request.getContextPath()%>/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath()%>/js/common.js"></script>
 <style type="text/css">
 body {height: 100%;}
 .breadcrumb {
@@ -39,6 +41,24 @@ body {height: 100%;}
      -moz-box-shadow: inset 0 1px 0 #ffffff;
           box-shadow: inset 0 1px 0 #ffffff;
 }
+.img_border {
+	padding-right: 5px;
+}
+
+/*平常的状态*/
+.link_normal{
+    font-size:9pt;
+	font-family:宋体;
+	color:#006A73;
+    text-decoration:none;
+}
+/*连接被按下的时候 */
+.link_hover{
+	COLOR: #00872F; 
+    font-size:9pt;
+    font-family:宋体;
+    text-decoration:none;
+}
 </style>
 </head>
 <%
@@ -53,7 +73,11 @@ body {height: 100%;}
                 <%
                 	for (Right right : menuList) {
                 %>
-                <td nowrap><a href="#" mid="<%= right.getId()%>"><img src="<%= request.getContextPath()%>/images/bof/pageSetup.png"/><%= right.getRightname() %></a></td>
+                <td nowrap><span fname="fname_top_menu" fid="<%= right.getId()%>"
+                class="link_normal"
+                onMouseOut="this.className='link_normal';"
+                onMouseOver="this.className='link_hover';"
+                ><img src="<%= request.getContextPath()%>/images/bof/pageSetup.png"/>&nbsp;<%= right.getRightname() %></span></td>
                 <td nowrap width="10px"></td>
                 <%
                 }
@@ -63,4 +87,23 @@ body {height: 100%;}
         <table>
     </div>
 </body>
+<script type="text/javascript">
+var rightList = new Object();
+<%
+for (Right right : menuList) {
+	out.println("rightList[\""+ right.getId() + "\"] = \""+ right.getUrl().replaceAll("\"", "\\\\\"").replaceAll("rootdir", request.getContextPath()) + "\";");
+}
+%>
+$(document).ready(function(){
+	$("span[fname=\"fname_top_menu\"]").click(function(){
+		var fid = $(this).attr("fid");
+		if (!isNull(fid)) {
+			$(window.parent.document).find("#navigation").attr("src", "<%=request.getContextPath()%>/jsp/left_menu.jsp?parenId=" + fid);
+			if (!isNull(rightList[fid])) {
+				$(window.parent.document).find("#workspace").attr("src", rightList[fid]);
+			}
+		}
+    });
+});
+</script>
 </html>

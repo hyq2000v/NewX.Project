@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@page import="newx.framework.FrameworkService"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
+<title><%=FrameworkService.getInstance().getTitle()%></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.9.1.js"></script>
-<title><%=FrameworkService.getInstance().getTitle()%></title>
 <style type="text/css">
 <!--
 *{overflow:hidden; font-size:9pt;}
@@ -66,7 +67,7 @@ $(document).ready(function() {
                   <tr>
                     <td height="40">&nbsp;</td>
                     <td height="40">&nbsp;</td>
-                    <td height="60"><a id="login" href="#"><img src="<%=contextPath%>/images/login/login.gif" width="95" height="34"></a></td>
+                    <td height="60"><img id="login" style="cursor:pointer" src="<%=contextPath%>/images/login/login.gif" width="95" height="34"></td>
                   </tr>
                 </table></td>
                 <td width="214" style="background:url(<%=contextPath%>/images/login/login04.jpg)" >&nbsp;</td>
