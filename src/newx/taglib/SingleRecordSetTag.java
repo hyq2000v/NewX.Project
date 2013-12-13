@@ -58,15 +58,10 @@ public class SingleRecordSetTag extends BodyTagSupport implements IRecordSetOwne
 	}
 	
 	public int doEndTag() throws JspException {
-		try {
-			JspWriter out = pageContext.getOut();
-			MemRecord record = memRecordSet.firstRecord();
-			int count = record.getFieldCount();
-			for (int i = 0; i < count; i++) {
-				out.println("<p>" + record.field(i).getValue() + "</p>");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		JspWriter out = pageContext.getOut();
+		MemRecord record = memRecordSet.firstRecord();
+		for (Object name : record.getFieldNames()) {
+			pageContext.setAttribute("" + name, record.field("" + name).getValue());
 		}
 		return EVAL_PAGE;
 	}

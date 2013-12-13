@@ -10,28 +10,28 @@
 <script type="text/javascript" src="<%= request.getContextPath()%>/js/common.js"></script>
 </head>
 <body>
-<newx:NavBar/>
+<newx:navbar/>
 <br>
-<newx:Panel id="ssssss" title="测试panel">
+<newx:panel id="ssssss" title="测试panel">
 fdsfdsfdsf;
 <br>
 fdsfdsf
-</newx:Panel>
-<newx:Panel title="测试panel">
+</newx:panel>
+<newx:panel title="测试panel">
 fdsfdsfdsf;
 <br>
 fdsfdsf
-</newx:Panel>
-<newx:Panel id="dfrffffffff" title="测试panel" width="50%">
+</newx:panel>
+<newx:panel id="dfrffffffff" title="测试panel" width="50%">
 fdsfdsfdsf;
 <br>
 fdsfdsf
-</newx:Panel>
-<newx:Panel title="测试panel">
+</newx:panel>
+<newx:panel title="测试panel">
 fdsfdsfdsf;
 <br>
 fdsfdsf
-</newx:Panel>
+</newx:panel>
 
 </body>
 </html>

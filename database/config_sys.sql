@@ -10,7 +10,7 @@ values ('demo_demo1_menu2', 'Demo1三级菜单2', 'rootdir/action/MainAction?men
 insert into sys_right (id, rightname, url, rightsortno, parentid, memo)
 values ('demo_2', 'Demo二级菜单二 ', 'rootdir/jsp/blank.jsp', '2', 'demo', '菜单权限');
 insert into sys_right (id, rightname, url, rightsortno, parentid, memo)
-values ('demo_demo2_menu1', 'Demo2三级菜单1', 'rootdir/action/MainAction?menuid="demo_demo2_menu1"&actionType=demo_demo2_menu1', '1', 'demo_2', '菜单权限');
+values ('demo_demo2_menu1', 'Demo2三级菜单1', 'rootdir/action/MainAction?menuid=demo_demo2_menu1&actionType=demo_demo2_menu1', '1', 'demo_2', '菜单权限');
 insert into sys_right (id, rightname, url, rightsortno, parentid, memo)
 values ('demo_demo2_menu2', 'Demo2三级菜单2', 'rootdir/action/MainAction?menuid=demo_demo2_menu2&actionType=demo_demo2_menu2', '2', 'demo_2', '菜单权限');
 

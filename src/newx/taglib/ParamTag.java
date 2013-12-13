@@ -12,9 +12,9 @@ import newx.taglib.base.PrividerParam;
  */
 public class ParamTag extends BodyTagSupport {
 	
-	public static String STRING = "S";
-	public static String INT = "I";
-	public static String DOUBLE = "D";
+	public static String STRING = "S"; 	//()
+	public static String INT = "I";    	//[]
+	public static String DOUBLE = "D";  //{}
 
 	private String name = "";
 	
@@ -54,9 +54,10 @@ public class ParamTag extends BodyTagSupport {
 			param.setType(type);
 			if (type.equals("I")) {
 				param.setValue(Integer.parseInt(value.toString()));
+			} else if (type.equals("D")) {
+				param.setValue(Double.parseDouble(value.toString()));
 			} else {
 				param.setValue(value);
-			
 			}
 			((RecordProviderTag)tag).addPram(param);
 		}

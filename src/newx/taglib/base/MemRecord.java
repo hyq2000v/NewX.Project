@@ -1,5 +1,7 @@
 package newx.taglib.base;
 
+import java.util.List;
+
 import org.apache.commons.collections.map.ListOrderedMap;
 
 /**
@@ -42,5 +44,9 @@ public class MemRecord {
 	
 	public int getFieldIndex(String fieldName) {
 		return values.indexOf(fieldName);
+	}
+	
+	public List getFieldNames() {
+		return values.keyList();
 	}
 }

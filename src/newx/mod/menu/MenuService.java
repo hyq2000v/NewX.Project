@@ -56,7 +56,13 @@ public class MenuService implements IModule {
 	}
  	
 	public Right getRightById(String rightId) {
-		return findRightById(topRights, rightId);
+		for (RightTreeNode node : topRights) {
+			Right right = findRightById(node, rightId);
+			if (right != null) {
+				return right;
+			}
+		}
+		return null;
 	}
 	
 	private void initRightTree(String parentId, List nodes, ArrayList<Right> allRight) {
@@ -70,14 +76,15 @@ public class MenuService implements IModule {
 		}
 	}
 	
-	public Right findRightById(List<RightTreeNode> nodes, String rightId) {
-		for (RightTreeNode node : nodes) {
-			if (node.getValue().getId().equalsIgnoreCase(rightId)) {
-				return node.getValue();
-			}
-			Right right = findRightById(node.getChildren(), rightId);
-			if (right != null) {
-				return right;
+	public Right findRightById(RightTreeNode node, String rightId) {
+		if (node.getValue().getId().equals(rightId)) {
+			return node.getValue();
+		}
+		List<RightTreeNode> children = node.getChildren();
+		for (RightTreeNode n : children) {
+			Right r = findRightById(n, rightId);
+			if (r != null) {
+				return r;
 			}
 		}
 		return null;

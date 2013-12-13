@@ -12,10 +12,11 @@ public class HtmlTdTag extends BodyTagSupport {
 	public int doEndTag() throws JspException {
 		try {
 			JspWriter out = pageContext.getOut();
-			out.println("<td vAlign=\"middle\" class=\"tdprompt\">");
+			out.println("<td valign=\"top\" class=\"tdprompt\">");
 			BodyContent bc = getBodyContent();
-			out.println(bc.getString());
-			out.println("</td>");
+			if (bc != null)
+				out.println(bc.getString());
+			out.println("&nbsp;</td>");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.ServletRequest;
 
 import newx.framework.IModule;
+import newx.taglib.ParamTag;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,8 +67,20 @@ public class TagService implements IModule {
 		}
 		while (enumer.hasMoreElements()) {
 			paramName = enumer.nextElement();
-			if (!paramMap.keySet().contains(paramName) && !findPrividerParam(paramName, parseParam)) {
-				sqlParam.addValue(paramName.toString(), request.getParameter(paramName.toString()));
+			if (!paramMap.keySet().contains(paramName) && paramMap.get(paramName) == null) {
+				for (PrividerParam pParam : parseParam) {
+					if (pParam.getName().equals(paramName) && request.getParameter(paramName.toString()) != null) {
+						if (pParam.getType().equals(ParamTag.INT)) {
+							sqlParam.addValue(paramName.toString(), Integer.parseInt(request.getParameter(paramName.toString())));
+						} else if (pParam.getType().equals(ParamTag.DOUBLE)) {
+							sqlParam.addValue(paramName.toString(), Double.parseDouble(request.getParameter(paramName.toString())));
+						} else {
+							sqlParam.addValue(paramName.toString(), request.getParameter(paramName.toString()));
+						}
+						break;
+						
+					}
+				}
 			}
 		}
 		return sqlParam;

@@ -63,26 +63,32 @@ public class RecordProvider {
 	}
 
 	public void parse() {
-		String regExAll = "(\\$\\{\\s*(\\w+)\\s*\\})|(\\$\\(\\s*(\\w+)\\s*\\))|(:(\\w+))";
-		String regEx = "(\\$\\{\\s*(\\w+)\\s*\\})|(\\$\\(\\s*(\\w+)\\s*\\))";
+		String regExAll = "(\\$\\{\\s*(\\w+)\\s*\\})|(\\$\\(\\s*(\\w+)\\s*\\))|(\\$\\[\\s*(\\w+)\\s*\\])|(:(\\w+))";
+		String regEx = "(\\$\\{\\s*(\\w+)\\s*\\})|(\\$\\(\\s*(\\w+)\\s*\\))|(\\$\\[\\s*(\\w+)\\s*\\])";
 		Pattern p = Pattern.compile(regExAll);
 		Matcher m = p.matcher(sql);
 		while (m.find()) {
 			if (m.group(1) != null) {
 				PrividerParam pram = new PrividerParam();
 				pram.setName(m.group(2));
-				pram.setType(ParamTag.STRING);
+				pram.setType(ParamTag.DOUBLE);
 				parseParam.add(pram);
 				sql = sql.replaceFirst(regEx, ":" + pram.getName());
 			} else if (m.group(3) != null) {
 				PrividerParam pram = new PrividerParam();
 				pram.setName(m.group(4));
-				pram.setType(ParamTag.INT);
+				pram.setType(ParamTag.STRING);
 				parseParam.add(pram);
 				sql = sql.replaceFirst(regEx, ":" + pram.getName());
 			} else if (m.group(5) != null) {
 				PrividerParam pram = new PrividerParam();
 				pram.setName(m.group(6));
+				pram.setType(ParamTag.INT);
+				parseParam.add(pram);
+				sql = sql.replaceFirst(regEx, ":" + pram.getName());
+			} else if (m.group(7) != null) {
+				PrividerParam pram = new PrividerParam();
+				pram.setName(m.group(8));
 				pram.setType(ParamTag.STRING);
 				parseParam.add(pram);
 			}

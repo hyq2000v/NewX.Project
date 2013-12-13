@@ -19,8 +19,8 @@ import newx.taglib.base.TagService;
 
 public class MultiRecordSetTag extends BodyTagSupport implements IRecordSetOwner{
 
-	private MemRecordSet memRecordSet = new MemRecordSet();
-	private List<RecordProvider> providerList = new ArrayList<RecordProvider>();
+	private MemRecordSet memRecordSet = null;
+	private List<RecordProvider> providerList = null;
 	
 	private String id = null;
 	
@@ -38,8 +38,8 @@ public class MultiRecordSetTag extends BodyTagSupport implements IRecordSetOwner
 	}
 
 	public int doStartTag() throws JspException {
-		memRecordSet.clear();
-		providerList.clear();
+		memRecordSet = new MemRecordSet();
+		providerList = new ArrayList<RecordProvider>();
 		return super.doStartTag();
 	}
 	
@@ -53,21 +53,26 @@ public class MultiRecordSetTag extends BodyTagSupport implements IRecordSetOwner
 	}
 	
 	public int doEndTag() throws JspException {
-		try {
-			JspWriter out = pageContext.getOut();
-			int count = memRecordSet.getRowCount();
-			MemRecord record = null;
-			for (int i = 0; i < count; i++) {
-				record = memRecordSet.record(i);
-				int s = record.getFieldCount();
-				for (int j = 0; j < s; j++) {
-					out.println("<b>" + record.field(j).getValue() + "</b>&nbsp;&nbsp;");
-				}
-				out.println("<p>");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		pageContext.setAttribute(id, memRecordSet);
 		return EVAL_PAGE;
 	}
+	
+//	public int doEndTag() throws JspException {
+//		try {
+//			JspWriter out = pageContext.getOut();
+//			int count = memRecordSet.getRowCount();
+//			MemRecord record = null;
+//			for (int i = 0; i < count; i++) {
+//				record = memRecordSet.record(i);
+//				int s = record.getFieldCount();
+//				for (int j = 0; j < s; j++) {
+//					out.println("<b>" + record.field(j).getValue() + "</b>&nbsp;&nbsp;");
+//				}
+//				out.println("<p>");
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return EVAL_PAGE;
+//	}
 }

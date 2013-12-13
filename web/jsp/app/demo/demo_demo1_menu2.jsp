@@ -10,24 +10,30 @@
 <script type="text/javascript" src="<%= request.getContextPath()%>/js/common.js"></script>
 </head>
 <body>
-<newx:NavBar/>
+<newx:navbar/>
 <br>
-<newx:SRecordSet id="demo_datasrc_test1">
-    <newx:Provider id="demo_dd_test1_s1" sql="select * from log_activity where name=:name" outParam="outparam1">
-    	<newx:Param name="name" type="S" value="阮欣南"/>
-    </newx:Provider>
-    <newx:Provider id="demo_dd_test1_s2" sql="select * from sys_right where 1 = 1 limit 1" outParam="outparam1"/>
-    <newx:Provider id="demo_sa_test1_s3" sql="select * from sys_right where 1 = 1 limit 1" outParam="outparam1"/>
-    <newx:Provider id="demo_sa_test1_s4" sql="select * from log_activity where id = :id" outParam="outparam1">
-    	<newx:Param name="id" type="I" value="42"/>
-    </newx:Provider>
-</newx:SRecordSet>
+<newx:sRecordSet id="demo_datasrc_test1">
+    <newx:provider id="demo_dd_test1_s1" sql="select * from log_activity where name=:name" outParam="outparam1">
+    	<newx:param name="name" type="S" value="阮欣南"/>
+    </newx:provider>
+    <newx:provider id="demo_dd_test1_s2" sql="select * from sys_right where 1 = 1 limit 1" outParam="outparam1"/>
+    <newx:provider id="demo_sa_test1_s3" sql="select * from sys_right where 1 = 1 limit 1" outParam="outparam1"/>
+    <newx:provider id="demo_sa_test1_s4" sql="select * from log_activity where id = :id" outParam="outparam1">
+    	<newx:param name="id" type="I" value="42"/>
+    </newx:provider>
+</newx:sRecordSet>
+<br>
+<b>page:<%= pageContext.getAttribute("name")%></b>
+<b><newx:attr name="ctime"/></b>
 <br>
 <br>
 <b>多记录数据源</b>
 <br>
-<newx:MRecordSet id="demo_datasrc_test2">
-    <newx:Provider id="demo_ma_test1_s3" sql="select * from sys_right where 1 = 1"/>
-</newx:MRecordSet>
+<newx:mRecordSet id="demo_datasrc_test2">
+    <newx:provider id="demo_ma_test1_s3" sql="select * from log_activity where name = $(name)">
+    	<newx:param name="name" value="花俊悔"/>
+    </newx:provider>
+</newx:mRecordSet>
+<b><newx:attr name="demo_datasrc_test2"/></b>
 </body>
 </html>

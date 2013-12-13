@@ -7,7 +7,7 @@
     <shortname>newx</shortname>
     <uri></uri>
     <tag>
-        <name>NavBar</name>
+        <name>navbar</name>
         <tagclass>newx.taglib.NavigateTag</tagclass>
         <bodycontent>empty</bodycontent>
     </tag>
@@ -27,7 +27,7 @@
         </attribute>
     </tag>  
     <tag>
-        <name>SRecordSet</name>
+        <name>sRecordSet</name>
         <tagclass>newx.taglib.SingleRecordSetTag</tagclass>
         <bodycontent>JSP</bodycontent>
         <attribute>
@@ -37,7 +37,7 @@
         </attribute>
     </tag>  
     <tag>
-        <name>MRecordSet</name>
+        <name>mRecordSet</name>
         <tagclass>newx.taglib.MultiRecordSetTag</tagclass>
         <bodycontent>JSP</bodycontent>
         <attribute>
@@ -52,7 +52,7 @@
         </attribute>
     </tag>  
     <tag>
-        <name>Provider</name>
+        <name>provider</name>
         <tagclass>newx.taglib.RecordProviderTag</tagclass>
         <bodycontent>JSP</bodycontent>
         <attribute>
@@ -72,7 +72,7 @@
         </attribute>
     </tag>
     <tag>
-        <name>Param</name>
+        <name>param</name>
         <tagclass>newx.taglib.ParamTag</tagclass>
         <bodycontent>empty</bodycontent>
         <attribute>
@@ -92,7 +92,7 @@
         </attribute>
     </tag>
     <tag>
-        <name>STable</name>
+        <name>stable</name>
         <tagclass>newx.taglib.SingleTableTag</tagclass>
         <bodycontent>JSP</bodycontent>
         <attribute>
@@ -137,17 +137,17 @@
         </attribute>
     </tag>  
     <tag>
-        <name>Tr</name>
+        <name>tr</name>
         <tagclass>newx.taglib.HtmlTrTag</tagclass>
         <bodycontent>JSP</bodycontent>
     </tag>  
     <tag>
-        <name>Td</name>
+        <name>td</name>
         <tagclass>newx.taglib.HtmlTdTag</tagclass>
         <bodycontent>JSP</bodycontent>
     </tag>  
     <tag>
-        <name>Panel</name>
+        <name>panel</name>
         <tagclass>newx.taglib.PanelTag</tagclass>
         <bodycontent>JSP</bodycontent>
         <attribute>
@@ -167,6 +167,21 @@
         </attribute>
         <attribute>
             <name>collapse</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>  
+    <tag>
+        <name>attr</name>
+        <tagclass>newx.taglib.AttributeTag</tagclass>
+        <bodycontent>empty</bodycontent>
+        <attribute>
+            <name>name</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>scope</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
