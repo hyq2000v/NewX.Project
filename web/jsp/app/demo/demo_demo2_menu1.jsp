@@ -12,21 +12,14 @@
 <body>
 <newx:navbar/>
 <br>
-<newx:stable hasTitle="false" title="测试标题">
+<newx:stable title="测试标题">
 <newx:tr>
-	<newx:td/>
-	<newx:td/>
-	<newx:td/>
+	<newx:td txt="角色名字" type="2" name="name"/>
+	<newx:td txt="角色名字" type="2" name="sex"/>
+	<newx:td txt="角色名" type="2" name="fdsfdsf"/>
 </newx:tr>
 <newx:tr>
-	<newx:td>fdsfsdf</newx:td>
-	<newx:td/>
-	<newx:td/>
-</newx:tr>
-<newx:tr>
-	<newx:td/>
-	<newx:td/>
-	<newx:td/>
+	<newx:td txt="&nbsp;" tcolspan="6"/>
 </newx:tr>
 </newx:stable>
 <br>
