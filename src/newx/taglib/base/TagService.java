@@ -67,7 +67,7 @@ public class TagService implements IModule {
 		}
 		while (enumer.hasMoreElements()) {
 			paramName = enumer.nextElement();
-			if (!paramMap.keySet().contains(paramName) && paramMap.get(paramName) == null) {
+			if (paramMap.get(paramName) == null) {
 				for (PrividerParam pParam : parseParam) {
 					if (pParam.getName().equals(paramName) && request.getParameter(paramName.toString()) != null) {
 						if (pParam.getType().equals(ParamTag.INT)) {
