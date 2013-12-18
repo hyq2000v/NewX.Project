@@ -56,7 +56,7 @@ public class RecordProviderTag extends BodyTagSupport {
 		provider.setOutParam(outParam);
 		provider.setSql(sql);
 		provider.parse();
-		owner.addRecordProvider(provider);
+		owner.execute(provider);
 		reset();
 		return EVAL_PAGE;
 	}

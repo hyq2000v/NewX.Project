@@ -33,7 +33,7 @@ public class NewXException extends RuntimeException implements java.io.Serializa
 			newTrace[0] = this.getStackTrace()[0];
 			newTrace[1] = new StackTraceElement(".", ".", "...", -1);
 			for (StackTraceElement item : this.t.getStackTrace()) {
-				if (item.getClassName().startsWith("bof")) {
+				if (item.getClassName().startsWith("newx")) {
 					newTrace[2] = item;
 					break;
 				}

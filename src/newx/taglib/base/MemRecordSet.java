@@ -89,9 +89,13 @@ public class MemRecordSet {
 	
 	public Object getValue(String fieldName) {
         try {
-        	return curRecord.field(fieldName).getValue();
+        	if (curRecord.field(fieldName) == null) {
+        		return null;
+        	} else {
+        		return curRecord.field(fieldName).getValue();
+        	}
         } catch(Exception e) {
-        	throw new NewXException(CommonErrorCode.SINGLE_RECORD_ERROR);
+        	throw new NewXException(CommonErrorCode.SINGLE_RECORD_ERROR, e);
         }
     }
 	

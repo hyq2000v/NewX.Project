@@ -13,10 +13,16 @@
 <newx:navbar/>
 <br>
 <newx:stable title="测试标题">
+<newx:provider id="log_activity_item" sql="select * from log_activity where id=$[id]" outParam="outparam1">
+	<newx:param name="id" type="I" value="8"/>
+</newx:provider>
+<newx:provider id="log_activity_item2" sql="select * from sys_right where id=:id" outParam="name">
+	<newx:param name="id" type="S" value="demo_demo1_menu2"/>
+</newx:provider>
 <newx:tr>
 	<newx:td txt="角色名字" type="2" name="name"/>
-	<newx:td txt="角色名字" type="2" name="sex"/>
-	<newx:td txt="角色名" type="2" name="fdsfdsf"/>
+	<td>fdsfdsfdsfds:<newx:attr name="account"/></td>
+	<newx:td txt="角色名" type="2" name="info"/>
 </newx:tr>
 <newx:tr>
 	<newx:td txt="&nbsp;" tcolspan="6"/>

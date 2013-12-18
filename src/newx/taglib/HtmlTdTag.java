@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
+import javax.servlet.jsp.tagext.Tag;
 
 import newx.util.StringUtil;
 
@@ -227,6 +228,7 @@ public class HtmlTdTag extends BodyTagSupport {
 	}
 
 	public int doEndTag() throws JspException {
+		SingleTableTag tableTag = (SingleTableTag)findAncestorWithClass(this, SingleTableTag.class);
 		try {
 			JspWriter out = pageContext.getOut();
 			ICell tcell = null;
@@ -242,13 +244,13 @@ public class HtmlTdTag extends BodyTagSupport {
 					break;
 			}
 			if ("none".equals(order)) {
-				if (ecell != null) ecell.write(out);
+				if (ecell != null) ecell.write(out, tableTag);
 			} else if ("desc".equals(order)) {
-				if (ecell != null) ecell.write(out);
-				if (tcell != null) tcell .write(out);
+				if (ecell != null) ecell.write(out, tableTag);
+				if (tcell != null) tcell .write(out, tableTag);
 			} else {
-				if (tcell != null) tcell .write(out);
-				if (ecell != null) ecell.write(out);
+				if (tcell != null) tcell .write(out, tableTag);
+				if (ecell != null) ecell.write(out, tableTag);
 			} 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -262,14 +264,14 @@ abstract class ICell {
 	public ICell(HtmlTdTag tag) {
 		this.tag = tag;
 	}
-	public abstract void write(JspWriter out) throws IOException;
+	public abstract void write(JspWriter out, SingleTableTag tableTag) throws IOException;
 }
 
 class TextCall extends ICell {
 	public TextCall(HtmlTdTag tag) {
 		super(tag);
 	}
-	public void write(JspWriter out) throws IOException {
+	public void write(JspWriter out, SingleTableTag tableTag) throws IOException {
 		out.print("<td width=\"" + tag.getTwidth() + "\" valign=\"middle\" class=\"tdprompt\"");
 		if (tag.getTcolspan() > 1) {
 			out.print(" colspan=\"" + tag.getTcolspan() + "\" ");
@@ -284,7 +286,7 @@ class InputCall extends ICell {
 	public InputCall(HtmlTdTag tag) {
 		super(tag);
 	}
-	public void write(JspWriter out) throws IOException {
+	public void write(JspWriter out, SingleTableTag tableTag) throws IOException {
 		out.print("<td width=\"" + tag.getWidth() + "\" valign=\"middle\" class=\"tdinput\"");
 		if (tag.getColspan() > 1) {
 			out.print(" colspan=" + tag.getColspan() + " ");
@@ -302,6 +304,10 @@ class InputCall extends ICell {
 		}
 		if (!StringUtil.isNullOrEmpty(tag.getVld())) {
 			out.print(" vld=\"" + tag.getVld() + " ");
+		}
+		if (tableTag.getRecordValue(tag.getName()) != null) {
+			Object val = tableTag.getRecordValue(tag.getName());
+			out.print(" value=\"" + StringUtil.replaceHTML(val == null ? null : val.toString()) + "\" ");
 		}
 		out.print(">");
 		out.println("</td>");

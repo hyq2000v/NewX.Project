@@ -1,8 +1,6 @@
 package newx.taglib;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
@@ -19,7 +17,6 @@ import newx.util.StringUtil;
 public class SingleTableTag extends BodyTagSupport implements IRecordSetOwner{
 
 	private MemRecordSet memRecordSet = null;
-	private List<RecordProvider> providerList = null; 
 	private static int md5key = 0;
 	
 	private String id = "";
@@ -101,15 +98,13 @@ public class SingleTableTag extends BodyTagSupport implements IRecordSetOwner{
 	public void setWidth(String width) {
 		this.width = width;
 	}
-
-	@Override
-	public void addRecordProvider(RecordProvider provider) {
-		providerList.add(provider);
+	
+	public Object getRecordValue(String fieldName) {
+		return memRecordSet.getValue(fieldName);
 	}
 	
 	public int doStartTag() throws JspException {
 		memRecordSet = new MemRecordSet();
-		providerList = new ArrayList<RecordProvider>(); 
 		if (StringUtil.isNullOrEmpty(id)) {
 			id = genDivKey();
 		} 
@@ -117,14 +112,6 @@ public class SingleTableTag extends BodyTagSupport implements IRecordSetOwner{
 	}
 	
 	public int doAfterBody() throws JspException {
-		ServletRequest request = pageContext.getRequest();
-		for (RecordProvider provider : providerList) {
-			if (provider.getId().indexOf("_dd_") == -1) {
-				TagService.getInstance().queryForObject(memRecordSet, provider, request);
-			} else {
-				TagService.getInstance().query(memRecordSet, provider, request);
-			}
-		}
 		return SKIP_BODY;
 	}
 	
@@ -166,5 +153,14 @@ public class SingleTableTag extends BodyTagSupport implements IRecordSetOwner{
 	private String genDivKey() {
 		md5key++;
 		return "f" + StringUtil.MD5("" + md5key);
+	}
+	
+	public void execute(RecordProvider provider) {
+		ServletRequest request = pageContext.getRequest();
+		if (provider.getId().indexOf("_dd_") == -1) {
+			TagService.getInstance().queryForObject(memRecordSet, provider, request);
+		} else {
+			TagService.getInstance().query(memRecordSet, provider, request);
+		}
 	}
 }
