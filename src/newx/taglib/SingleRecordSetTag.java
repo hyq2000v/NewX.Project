@@ -2,7 +2,6 @@ package newx.taglib;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import newx.taglib.base.IRecordSetOwner;
@@ -11,7 +10,7 @@ import newx.taglib.base.MemRecordSet;
 import newx.taglib.base.RecordProvider;
 import newx.taglib.base.TagService;
 
-public class SingleRecordSetTag extends BodyTagSupport implements IRecordSetOwner{
+public class SingleRecordSetTag extends BodyTagSupport implements IRecordSetOwner {
 	
 	private MemRecordSet memRecordSet = new MemRecordSet();
 	
@@ -39,7 +38,6 @@ public class SingleRecordSetTag extends BodyTagSupport implements IRecordSetOwne
 	}
 	
 	public int doEndTag() throws JspException {
-		JspWriter out = pageContext.getOut();
 		MemRecord record = memRecordSet.firstRecord();
 		for (Object name : record.getFieldNames()) {
 			pageContext.setAttribute("" + name, record.field("" + name).getValue());

@@ -5,12 +5,27 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import newx.exception.CommonErrorCode;
+import newx.exception.NewXException;
+
 public class Test {
+	
+	public static void main(String[] args) {
+		testException();
+	}
+	
+	public static void testException() {
+		try {
+			System.out.println(4%0);
+		} catch(Exception e) {
+        	throw new NewXException(CommonErrorCode.SINGLE_RECORD_ERROR, e);
+        }
+	}
 
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main2(String[] args) {
 		// TODO Auto-generated method stub
 
 //		String s = "dir/action/MainAction?menuid=\"demo_demo2_menu1\"&actionT";

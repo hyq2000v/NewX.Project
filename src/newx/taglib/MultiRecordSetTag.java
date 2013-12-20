@@ -50,23 +50,4 @@ public class MultiRecordSetTag extends BodyTagSupport implements IRecordSetOwner
 		TagService.getInstance().query(memRecordSet, provider, request);
 		execute = true;
 	}
-	
-//	public int doEndTag() throws JspException {
-//		try {
-//			JspWriter out = pageContext.getOut();
-//			int count = memRecordSet.getRowCount();
-//			MemRecord record = null;
-//			for (int i = 0; i < count; i++) {
-//				record = memRecordSet.record(i);
-//				int s = record.getFieldCount();
-//				for (int j = 0; j < s; j++) {
-//					out.println("<b>" + record.field(j).getValue() + "</b>&nbsp;&nbsp;");
-//				}
-//				out.println("<p>");
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return EVAL_PAGE;
-//	}
 }

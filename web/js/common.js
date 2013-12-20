@@ -10,6 +10,11 @@ $(document).ready(function(){
     	$("div[ftype=\"div_click_collapse_stable\"][fid=\"" + $(this).attr("fid") + "\"]").toggle();
     });
     
+    // mtable标题单击事件
+    $("img[ftype=\"img_click_collapse_mtable\"]").click(function(){
+    	$("div[ftype=\"div_click_collapse_mtable\"][fid=\"" + $(this).attr("fid") + "\"]").toggle();
+    });
+    
 });
 
 // 判空

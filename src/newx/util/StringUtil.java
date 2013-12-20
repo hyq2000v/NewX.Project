@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import newx.taglib.base.FieldValue;
 import sun.misc.BASE64Decoder;
 
 public class StringUtil {
@@ -105,6 +106,12 @@ public class StringUtil {
 	 * @param str
 	 * @return
 	 */
+	public static String replaceHTML(FieldValue field) {
+		if (field == null)
+			return null;
+		else
+			return replaceHTML("" + field.getValue());
+	}
 	public static String replaceHTML(String str) {
 		if (str == null)
 			return null;

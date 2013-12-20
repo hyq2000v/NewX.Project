@@ -9,6 +9,7 @@ import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import newx.taglib.base.IRecordSetOwner;
+import newx.taglib.base.MemRecord;
 import newx.taglib.base.MemRecordSet;
 import newx.taglib.base.RecordProvider;
 import newx.taglib.base.TagService;
@@ -106,7 +107,7 @@ public class SingleTableTag extends BodyTagSupport implements IRecordSetOwner{
 	public int doStartTag() throws JspException {
 		memRecordSet = new MemRecordSet();
 		if (StringUtil.isNullOrEmpty(id)) {
-			id = genDivKey();
+			id = genKey();
 		} 
 		return super.doStartTag();
 	}
@@ -136,21 +137,21 @@ public class SingleTableTag extends BodyTagSupport implements IRecordSetOwner{
 		out.println("<table class=\"dataTable\" cellpadding=\"0\" cellspacing=\"0\" align=\"center\"  border=\"0\"  width=\"" + getWidth() + "\">");
 		out.println("<tr><td nowrap class=\"single_table_title\"> &nbsp;<img ftype=\"img_click_collapse_stable\" fid=\"" + getId() + "\" style=\"cursor:pointer\" src=\"" + pageContext.getServletContext().getContextPath() + "/images/dot11.gif\" width=\"9\" height=\"9\"></a>&nbsp;" + getTitle() + " </td></tr>");
 		out.println("</table>");
+		out.println("<div ftype=\"div_click_collapse_stable\" fid=\"" + getId() + "\" style=\"display:block; class=\"panelBorder\" align=\"left\">");
 		writeTable(out, bodyContent);
+		out.println("</div>");
 		out.println("</div>");
 	}
 	
 	private void writeTable(JspWriter out, String bodyContent) throws IOException{
-		out.println("<div ftype=\"div_click_collapse_stable\" fid=\"" + getId() + "\" style=\"display:block; class=\"panelBorder\" align=\"left\">");
-		out.println("<table class=\"datatable\" cellpadding=\"0\" cellspacing=\"0\" align=\"center\"  border=0 fid=\"" + getId() + "\" width=" + getWidth() + ">");
+		out.println("<table class=\"datatable\" cellpadding=\"0\" cellspacing=\"0\" align=\"center\"  border=0 fid=\"" + getId() + "\" width=\"" + getWidth() + "\">");
 		out.println("<tbody>");
 		out.println(bodyContent);
 		out.println("</tbody>");
 		out.println("</table>");
-		out.println("</div>");
 	}
 	
-	private String genDivKey() {
+	private String genKey() {
 		md5key++;
 		return "f" + StringUtil.MD5("" + md5key);
 	}
@@ -161,6 +162,15 @@ public class SingleTableTag extends BodyTagSupport implements IRecordSetOwner{
 			TagService.getInstance().queryForObject(memRecordSet, provider, request);
 		} else {
 			TagService.getInstance().query(memRecordSet, provider, request);
+		}
+		MemRecord record = memRecordSet.firstRecord();
+		if (record != null && !StringUtil.isNullOrEmpty(provider.getOutParam())) {
+			String [] outparam = provider.getOutParam().split("\\|");
+			for (String name : outparam) {
+				if (record.field(name) != null) {
+					pageContext.setAttribute(name, record.field(name).getValue());
+				}
+			}
 		}
 	}
 }

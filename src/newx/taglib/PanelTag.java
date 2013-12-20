@@ -59,7 +59,7 @@ public class PanelTag extends BodyTagSupport {
 
 	public int doStartTag() throws JspException {
 		if (StringUtil.isNullOrEmpty(id)) {
-			id = genDivKey();
+			id = genKey();
 		} 
 		return super.doStartTag();
 	}
@@ -83,7 +83,7 @@ public class PanelTag extends BodyTagSupport {
 	    return EVAL_PAGE;
     }
 	
-	private synchronized String genDivKey() {
+	private synchronized String genKey() {
 		md5key++;
 		return "f" + StringUtil.MD5("" + md5key);
 	}
