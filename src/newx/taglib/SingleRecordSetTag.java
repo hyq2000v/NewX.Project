@@ -40,7 +40,7 @@ public class SingleRecordSetTag extends BodyTagSupport implements IRecordSetOwne
 	public int doEndTag() throws JspException {
 		MemRecord record = memRecordSet.firstRecord();
 		for (Object name : record.getFieldNames()) {
-			pageContext.setAttribute("" + name, record.field("" + name).getValue());
+			pageContext.setAttribute("" + name, record.field("" + name));
 		}
 		return EVAL_PAGE;
 	}

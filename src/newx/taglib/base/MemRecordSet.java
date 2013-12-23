@@ -1,6 +1,5 @@
 package newx.taglib.base;
 
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,8 +7,6 @@ import java.util.Map;
 
 import newx.exception.CommonErrorCode;
 import newx.exception.NewXException;
-
-import org.apache.commons.collections.map.ListOrderedMap;
 
 /**
  * 对象提供了在内存中保存表格型数据的功能
@@ -28,7 +25,7 @@ public class MemRecordSet {
 	 * 单记录数据集
 	 * @param map
 	 */
-	public void populate(String dbSrcId, Map<String, FieldValue> map) {
+	public void populate(String dbSrcId, Map<String, Object> map) {
 		if (records.size() > 1) {
 			throw new NewXException(CommonErrorCode.SINGLE_RECORD_ERROR);
 		}
@@ -38,7 +35,7 @@ public class MemRecordSet {
 		}
 		for (Iterator<String> it = map.keySet().iterator(); it.hasNext();) {
 			String key = it.next();
-			FieldValue fieldValue = map.get(key);
+			Object fieldValue = map.get(key);
 			curRecord.put(key, fieldValue);
 		}
 	}
@@ -48,7 +45,7 @@ public class MemRecordSet {
 	 * @param dbSrcId
 	 * @param list
 	 */
-	public void populate(String dbSrcId, List<Map> list) {
+	public void populate(String dbSrcId, List<Map<String, Object>> list) {
 		if (records.size() != 0 && dbSrcId.indexOf("_dd_") == -1) {
 			throw new NewXException(CommonErrorCode.MULTI_RECORD_ERROR);
 		}
@@ -57,7 +54,7 @@ public class MemRecordSet {
 				curRecord = appendRecord();
 				for (Iterator<String> it = row.keySet().iterator(); it.hasNext();) {
 					String key = it.next();
-					FieldValue fieldValue = (FieldValue)row.get(key);
+					Object fieldValue = row.get(key);
 					curRecord.put(key, fieldValue);
 				}
 			}
@@ -65,11 +62,11 @@ public class MemRecordSet {
 			curRecord = firstRecord();
 			if (curRecord == null)
 				curRecord = appendRecord();
-			curRecord.put(dbSrcId, new FieldValue(list, Types.JAVA_OBJECT));
+			curRecord.put(dbSrcId, list);
 		}
 	}
 	
-	public FieldValue cell(int colIndex, int rowIndex) {
+	public Object cell(int colIndex, int rowIndex) {
 		MemRecord record = record(rowIndex);
 		if (record == null) {
 			return null;
@@ -78,7 +75,7 @@ public class MemRecordSet {
 		}
 	}
 	
-	public FieldValue cell(String fieldName,int rowIndex) {
+	public Object cell(String fieldName,int rowIndex) {
 		MemRecord record = record(rowIndex);
 		if (record == null) {
 			return null;
@@ -89,12 +86,11 @@ public class MemRecordSet {
 	
 	public Object getValue(String fieldName) {
         try {
-//        	if (curRecord.field(fieldName) == null) {
-//        		return null;
-//        	} else {
-        	System.out.println(5%0);
-        		return curRecord.field(fieldName).getValue();
-//        	}
+        	if (curRecord.field(fieldName) == null) {
+        		return null;
+        	} else {
+        		return curRecord.field(fieldName);
+        	}
         } catch(Exception e) {
         	throw new NewXException(CommonErrorCode.SINGLE_RECORD_ERROR, e);
         }

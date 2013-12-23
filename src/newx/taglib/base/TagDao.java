@@ -1,6 +1,7 @@
 package newx.taglib.base;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -21,17 +22,17 @@ public class TagDao extends AbstractDao {
 		super(dataSource);
 	}
 	
-	public <T> T queryForObject(String sql, ParameterizedRowMapper<T> rm, SqlParameterSource args) {
+	public Map<String, Object> queryForMap(String sql, SqlParameterSource args) {
 		try {
-			return simpleJdbcTemplate.queryForObject(sql, rm, args);
+			return super.queryForMap(sql, args);
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
 	}
 	
-	public <T> List<T> query(String sql, ParameterizedRowMapper<T> rm, SqlParameterSource args) {
+	public List<Map<String, Object>> queryForList(String sql, SqlParameterSource args) {
 		try {
-			return simpleJdbcTemplate.query(sql, rm, args);
+			return super.queryForList(sql, args);
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}

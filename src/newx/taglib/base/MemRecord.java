@@ -16,25 +16,25 @@ public class MemRecord {
 		values = new ListOrderedMap();
 	}
 	
-	public FieldValue field(int index) {
+	public Object field(int index) {
 		Object value = values.getValue(index);
 		if (value == null) {
 			return null;
 		} else {
-			return (FieldValue)value;
+			return value;
 		}
 	}
 	
-	public FieldValue field(String fieldName) {
+	public Object field(String fieldName) {
 		Object value = values.get(fieldName);
 		if (value == null) {
 			return null;
 		} else {
-			return (FieldValue)value;
+			return value;
 		}
 	}
 	
-	public Object put(String fieldName, FieldValue fieldValue) {
+	public Object put(String fieldName, Object fieldValue) {
 		return values.put(fieldName, fieldValue);
 	}
 	

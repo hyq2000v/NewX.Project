@@ -11,15 +11,20 @@ import newx.exception.NewXException;
 public class Test {
 	
 	public static void main(String[] args) {
-		testException();
+		double c = 1.0*8/3;
+		System.out.println(c);
+		System.out.println(Math.ceil(c));
+		System.out.println(Math.floor(c));
+//		testException();
 	}
 	
 	public static void testException() {
-		try {
-			System.out.println(4%0);
-		} catch(Exception e) {
-        	throw new NewXException(CommonErrorCode.SINGLE_RECORD_ERROR, e);
-        }
+		System.out.println("fdfds");
+//		try {
+//			System.out.println(4%0);
+//		} catch(Exception e) {
+//        	throw new NewXException(CommonErrorCode.SINGLE_RECORD_ERROR, e);
+//        }
 	}
 
 	/**

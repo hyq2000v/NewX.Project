@@ -11,6 +11,7 @@ import newx.taglib.ParamTag;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 public class TagService implements IModule {
@@ -45,15 +46,44 @@ public class TagService implements IModule {
 	public void queryForObject(MemRecordSet recordSet, RecordProvider provider, ServletRequest request) {
 		String sql = provider.getSql();
 		MapSqlParameterSource paramMap = getParamMap(request, provider);
-		Map data = tagDao.queryForObject(sql, new FieldColumnMapRowMapper(), paramMap);
+		Map data = tagDao.queryForMap(sql, paramMap);
 		recordSet.populate(provider.getId(), data);
 	}
 	
 	public void query(MemRecordSet recordSet, RecordProvider provider, ServletRequest request) {
 		String sql = provider.getSql();
 		MapSqlParameterSource paramMap = getParamMap(request, provider);
-		List<Map> list = tagDao.query(sql, new FieldColumnMapRowMapper(), paramMap);
+		List<Map<String, Object>> list = tagDao.queryForList(sql, paramMap);
 		recordSet.populate(provider.getId(), list);
+	}
+	
+	public void queryLimit(MemRecordSet recordSet, RecordProvider provider, ServletRequest request, int offset, int limit) {
+		String sql = provider.getSql();
+		StringBuffer buf = new StringBuffer(sql.length()+20).append(sql);
+		if (offset>0) {
+			buf.append(" limit ")
+				.append(offset)
+				.append(", ")
+				.append(limit);
+		}
+		else {
+			buf.append(" limit ").append(limit);
+		}
+		sql = buf.toString();
+		MapSqlParameterSource paramMap = getParamMap(request, provider);
+		List<Map<String, Object>> list = tagDao.queryForList(sql, paramMap);
+		recordSet.populate(provider.getId(), list);
+	}
+	
+	public int getResultSetCount(RecordProvider provider, ServletRequest request) {
+		String sql = provider.getSql();
+		String countSQL = "select count(*) from (" + sql + ") _ct";
+		MapSqlParameterSource paramMap = getParamMap(request, provider);
+		Map data = tagDao.queryForMap(countSQL, paramMap);
+		for (Object obj : data.values()) {
+			return Integer.parseInt(obj.toString());
+		}
+		return 0;
 	}
 	
 	private MapSqlParameterSource getParamMap(ServletRequest request, RecordProvider provider) {

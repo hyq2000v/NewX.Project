@@ -33,6 +33,9 @@ public class MultiTableTag extends BodyTagSupport implements IRecordSetOwner {
 	private boolean hasTitle = true;
 	private int size = 10;
 	
+	private int totalRow = 0;
+	private int totalPage = 0;
+	private int pageIndex = 1;
 	
 	public String getId() {
 		return id;
@@ -108,14 +111,18 @@ public class MultiTableTag extends BodyTagSupport implements IRecordSetOwner {
 		out.println("<table class=\"dataTable\" cellpadding=\"0\" cellspacing=\"0\" align=\"center\"  border=\"0\"  width=\"" + getWidth() + "\">");
 		out.println("<tr><td nowrap class=\"single_table_title\"> &nbsp;<img ftype=\"img_click_collapse_mtable\" fid=\"" + getId() + "\" style=\"cursor:pointer\" src=\"" + pageContext.getServletContext().getContextPath() + "/images/dot11.gif\" width=\"9\" height=\"9\"></a>&nbsp;" + getTitle() + " </td></tr>");
 		out.println("</table>");
-		out.println("<div ftype=\"div_click_collapse_mtable\" fid=\"" + getId() + "\" style=\"display:block; class=\"panelBorder\" align=\"left\">");
+		out.println("<div ftype=\"div_click_collapse_mtable\" fid=\"" + getId() + "\" style=\"display:block; width:" + getWidth() + ";\" class=\"panelBorder\" align=\"center\">");
 		writeTable(out);
 		out.println("</div>");
 		out.println("</div>");
 	}
 	
 	private void writeTable(JspWriter out) throws IOException{
-		out.println("<table align=center width=\"" + getWidth() + "\" class=\"list_table\" name=\"" + getId() + "\" id=\"" + getId() + "\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+		if (hasTitle) {
+			out.println("<table align=center width=\"100%\" class=\"list_table\" name=\"" + getId() + "\" id=\"" + getId() + "\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+		} else {
+			out.println("<table align=center width=\"" + getWidth() + "\" class=\"list_table\" name=\"" + getId() + "\" id=\"" + getId() + "\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+		}
 		out.println("<thead>");
 		out.println("<tr class=\"list_table_thead_tr_title\">");
 		for (MultiTableHead head : headList) {
@@ -144,9 +151,9 @@ public class MultiTableTag extends BodyTagSupport implements IRecordSetOwner {
 	private void writePageInfo(JspWriter out) throws IOException{
 		out.print("<table class=\"list_table_pageSplitInfo\" width=\"" + getWidth() + "\" align=\"center\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">");
 		out.print("<tr><td nowrap><div class=\"list_table_pageSplitInfo\">");
-		out.print("共有 <b> 9596 </b>条记录&nbsp;&nbsp;");
-		out.print("<b> 960 </b> 页&nbsp;&nbsp;当前是第 <b> 1  </b> 页&nbsp;&nbsp;上页&nbsp;&nbsp<a href=\"#\">下页</a>&nbsp;&nbsp");
-		out.print("翻到第<input class=\"tdinput\" type=text size=5 id=\"dwjbxx_list_pagenum\" onkeypress=\"turnPageTo('dwjbxx_list')\">页<input style=\"display:none\" type=text size=1> <a id=\"dwjbxx_list_pageto\" href=\"#\"><img src=\"" + pageContext.getServletContext().getContextPath() + "/images/go.gif\"> </a>");
+		out.print("共有 <b> " + totalRow + " </b>条记录&nbsp;&nbsp;");
+		out.print("<b> " + totalPage + " </b> 页&nbsp;&nbsp;当前是第 <b> " + pageIndex + "  </b> 页&nbsp;&nbsp;上页&nbsp;&nbsp<a href=\"#\">下页</a>&nbsp;&nbsp");
+		out.print("翻到第<input class=\"tdinput\" type=text size=5 id=\"dwjbxx_list_pagenum\" onkeypress=\"turnPageTo('dwjbxx_list')\">页<input style=\"display:none\" type=text size=1> <a id=\"dwjbxx_list_pageto\" href=\"#\" style=\"text-align: center;\"><img src=\"" + pageContext.getServletContext().getContextPath() + "/images/go.gif\"> </a>");
 		out.print("</div></td></tr>");
 		out.println("</table>");
 	}
@@ -156,7 +163,15 @@ public class MultiTableTag extends BodyTagSupport implements IRecordSetOwner {
 			throw new NewXException(CommonErrorCode.MULTI_RECORD_ERROR);
 		}
 		ServletRequest request = pageContext.getRequest();
-		TagService.getInstance().query(memRecordSet, provider, request);
+		TagService.getInstance().queryLimit(memRecordSet, provider, request, (pageIndex <= 0 ? 0 : (pageIndex - 1) * size), size);
+		String tr = request.getParameter("__totalRow");
+		if (!StringUtil.isNullOrEmpty(tr)) {
+			totalRow = Integer.parseInt(tr);
+			totalPage = totalRow/size + (totalRow%size == 0 ? 0 : 1);
+		} else {
+			totalRow = TagService.getInstance().getResultSetCount(provider, request);
+			totalPage = totalRow/size + (totalRow%size == 0 ? 0 : 1);
+		}
 		execute = true;
 	}
 	

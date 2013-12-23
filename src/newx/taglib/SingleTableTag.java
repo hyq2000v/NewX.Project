@@ -168,7 +168,7 @@ public class SingleTableTag extends BodyTagSupport implements IRecordSetOwner{
 			String [] outparam = provider.getOutParam().split("\\|");
 			for (String name : outparam) {
 				if (record.field(name) != null) {
-					pageContext.setAttribute(name, record.field(name).getValue());
+					pageContext.setAttribute(name, record.field(name));
 				}
 			}
 		}
