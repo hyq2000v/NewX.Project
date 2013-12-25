@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 public class ActionServlet extends org.apache.struts.action.ActionServlet {
 
 	private static final Logger log = Logger.getLogger(ActionServlet.class);
-	
+		    
 	protected void initOther() throws ServletException {
 		super.initOther();
 		List<NewXProject> list = StrutsConfigService.getInstance().getProjectList();

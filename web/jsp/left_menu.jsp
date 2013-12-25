@@ -11,7 +11,7 @@
 <title>banner</title>
 <link href="<%=request.getContextPath()%>/css/menu.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%= request.getContextPath()%>/js/jquery-1.9.1.js"></script>
-<script type="text/javascript" src="<%= request.getContextPath()%>/js/common.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath()%>/js/newx.js"></script>
 <style type="text/css">
 /*平常的状态*/
 .link_normal{

@@ -32,6 +32,12 @@ public class EncodingFilter implements Filter {
                 request.setCharacterEncoding(encoding);
             }
         }
+        if (request instanceof HttpServletRequest) {
+        	String requestUri = ((HttpServletRequest)request).getRequestURI();
+        	if (requestUri != null) {
+        		request.setAttribute("__requestUri", requestUri);
+        	}
+        }
         String menuId = request.getParameter("menuid");
         if (menuId == null){
         }else{

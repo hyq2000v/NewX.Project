@@ -11,11 +11,7 @@ import newx.exception.NewXException;
 public class Test {
 	
 	public static void main(String[] args) {
-		double c = 1.0*8/3;
-		System.out.println(c);
-		System.out.println(Math.ceil(c));
-		System.out.println(Math.floor(c));
-//		testException();
+		testUrl();
 	}
 	
 	public static void testException() {
@@ -25,6 +21,9 @@ public class Test {
 //		} catch(Exception e) {
 //        	throw new NewXException(CommonErrorCode.SINGLE_RECORD_ERROR, e);
 //        }
+	}
+	public static void testUrl() {
+		System.out.println(Test.class.getResource("/java/util/ArrayList.class"));
 	}
 
 	/**

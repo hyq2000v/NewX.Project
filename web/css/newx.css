@@ -694,3 +694,19 @@ buttonLink {
 	padding-top:5px;
 	height:20px;
 }
+/*平常的状态*/
+.link_normal{
+    font-size:9pt;
+	font-family:宋体;
+	color:#006A73;
+    text-decoration:none;
+    cursor:pointer;
+}
+/*连接被按下的时候 */
+.link_hover{
+	COLOR: #00872F; 
+    font-size:9pt;
+    font-family:宋体;
+    text-decoration:none;
+    cursor:pointer;
+}

@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link href="<%=request.getContextPath()%>/css/newx.css" rel="stylesheet">
 <script type="text/javascript" src="<%= request.getContextPath()%>/js/jquery-1.9.1.js"></script>
-<script type="text/javascript" src="<%= request.getContextPath()%>/js/common.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath()%>/js/newx.js"></script>
 <style type="text/css">
 body {height: 100%;}
 .breadcrumb {
