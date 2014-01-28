@@ -7,7 +7,9 @@
 			<forward name="demo_demo1_menu2" path="/jsp/app/demo/demo_demo1_menu2.jsp" />
 			<forward name="demo_demo2_menu1" path="/jsp/app/demo/demo_demo2_menu1.jsp" />
 			<forward name="demo_demo2_menu2" path="/jsp/app/demo/demo_demo2_menu2.jsp" />
+			
+			<forward name="demo3_demo1_menu1" path="/jsp/app/demo/demo3_demo1_menu1.jsp" />
+			<forward name="demo3_demo1_menu2" path="/jsp/app/demo/demo3_demo1_menu2.jsp" />
 		</action>
 	</action-mappings>
 </struts-config>
-

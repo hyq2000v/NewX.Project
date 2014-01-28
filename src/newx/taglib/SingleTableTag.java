@@ -137,7 +137,7 @@ public class SingleTableTag extends BodyTagSupport implements IRecordSetOwner{
 		out.println("<table class=\"dataTable\" cellpadding=\"0\" cellspacing=\"0\" align=\"center\"  border=\"0\"  width=\"" + getWidth() + "\">");
 		out.println("<tr><td nowrap class=\"single_table_title\"> &nbsp;<img ftype=\"img_click_collapse_stable\" fid=\"" + getId() + "\" style=\"cursor:pointer\" src=\"" + pageContext.getServletContext().getContextPath() + "/images/dot11.gif\" width=\"9\" height=\"9\"></a>&nbsp;" + getTitle() + " </td></tr>");
 		out.println("</table>");
-		out.println("<div ftype=\"div_click_collapse_stable\" fid=\"" + getId() + "\" style=\"display:block; class=\"panelBorder\" align=\"left\">");
+		out.println("<div ftype=\"div_click_collapse_stable\" fid=\"" + getId() + "\" style=\"display:block;\" class=\"panelBorder\" align=\"left\">");
 		writeTable(out, bodyContent);
 		out.println("</div>");
 		out.println("</div>");

@@ -306,4 +306,24 @@
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag> 
+    <tag>
+        <name>form</name>
+        <tagclass>newx.taglib.FormTag</tagclass>
+        <bodycontent>JSP</bodycontent>
+        <attribute>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>action</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>method</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag> 
 </taglib>
